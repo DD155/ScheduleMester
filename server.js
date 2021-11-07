@@ -1,6 +1,10 @@
+const DB_URI = 'mongodb+srv://user:6kSSN0qGqgU2yQKL@clusterdb.5oyzj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config()
 }
+
+
 
 const express = require('express')
 const app = express()
@@ -15,7 +19,7 @@ app.use(expressLayouts)
 app.use(express.static('public'))
 
 const mongoose = require('mongoose')
-mongoose.connect(process.env.DATABASE_URL, {
+mongoose.connect(process.env.DATABASE_URL || DB_URI, {
     useNewUrlParser: true})
 const db = mongoose.connection
 db.on('error', error => console.error(error))
